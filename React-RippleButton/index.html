@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RippleButton</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@500;600&display=swap" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        box-sizing: border-box;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: radial-gradient(760px 480px at 88% -8%, #0ea5a429, transparent 65%),
+          radial-gradient(620px 460px at 8% 108%, #ff6b4a1f, transparent 60%),
+          linear-gradient(#f7fafc, #eef3f9);
+      }
+      #root { width: min(100%, 550px); display: grid; place-items: center; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
