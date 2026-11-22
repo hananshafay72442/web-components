@@ -1,0 +1,104 @@
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('./assets/fonts/instrument-serif-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('./assets/fonts/instrument-serif-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --paper: #f3efe8;
+  --ink: #211d20;
+  --accent: #a7432d;
+  --muted: #675e58;
+  --ink-toggle-inset: clamp(18px, 3.2vw, 40px);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #151317;
+  --ink: #f4eee6;
+  --accent: #ee997f;
+  --muted: #b5aca7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --paper: #151317;
+    --ink: #f4eee6;
+    --accent: #ee997f;
+    --muted: #b5aca7;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body { font-family: system-ui, sans-serif; }
+
+.specimen {
+  position: relative;
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 44px 22px 104px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+}
+
+h1 span { display: block; }
+
+.opening, .closing {
+  font-size: clamp(1.5rem, 3vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -.025em;
+}
+
+.name {
+  margin: .12em 0 .09em;
+  font-size: clamp(4rem, 18vw, 14rem);
+  line-height: .91;
+  letter-spacing: -.055em;
+}
+
+.name em { color: var(--accent); }
+
+.instruction {
+  position: absolute;
+  left: max(22px, env(safe-area-inset-left, 0px));
+  bottom: calc(var(--ink-toggle-inset) + env(safe-area-inset-bottom, 0px) + 15px);
+  max-width: calc(100% - 135px);
+  margin: 0;
+  color: var(--muted);
+  font-size: .82rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+@media (min-width: 650px) {
+  .instruction { left: var(--ink-toggle-inset); }
+}
+
+@media (max-height: 380px) {
+  .name { font-size: min(22vh, 14vw); }
+}

@@ -1,0 +1,61 @@
+.toggle {
+  position: fixed;
+  z-index: var(--ink-toggle-z-index, 50);
+  right: calc(var(--ink-toggle-inset, 24px) + env(safe-area-inset-right, 0px));
+  bottom: calc(var(--ink-toggle-inset, 24px) + env(safe-area-inset-bottom, 0px));
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  color: var(--ink-toggle-icon, #25201f);
+  background: var(--ink-toggle-surface, #f8f5ef);
+  border: 1px solid var(--ink-toggle-border, #b9b1a6);
+  border-radius: 50%;
+  box-shadow: 0 3px 12px #21191112;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:global(html[data-theme='dark']) .toggle {
+  color: var(--ink-toggle-icon, #f3eee7);
+  background: var(--ink-toggle-surface, #211e20);
+  border-color: var(--ink-toggle-border, #555052);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+
+@media (hover: hover) {
+  .toggle:hover { border-color: currentColor; }
+}
+
+/* Scope the snapshot rules to this toggle so other page transitions keep
+   their own animations. Capture named elements in the same ink reveal. */
+:global(html[data-ink-bloom] *) {
+  view-transition-name: none !important;
+}
+
+:global(html[data-ink-bloom])::view-transition-old(root),
+:global(html[data-ink-bloom])::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+:global(html[data-ink-bloom])::view-transition-image-pair(root) {
+  isolation: isolate;
+}
+
+:global(html[data-ink-bloom])::view-transition-new(root) {
+  mask-image: var(--ink-bloom-mask);
+  /* Keep both snapshots alive while the native SVG animation reveals them. */
+  animation: keepSnapshots var(--ink-bloom-duration) linear both;
+}
+
+@keyframes keepSnapshots {
+  from { opacity: 1; }
+  to { opacity: 1; }
+}
